@@ -1,20 +1,82 @@
-// Problem #18.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#include <iostream>   // Include the iostream library for input/output operations.
+#include <string>     // Include the string library for using std::string.
+using namespace std;  // Use the standard namespace to avoid prepending std:: to common objects.
 
-#include <iostream>
-
-int main()
+// Function: ReadText
+// Purpose: Prompts the user to enter a line of text and reads the full line.
+// Returns: The text entered by the user as a string.
+string ReadText()
 {
-    std::cout << "Hello World!\n";
+    string Text;  // Declare a string variable to store the input text.
+
+    cout << "Please enter Text?\n"; // Prompt the user for input.
+    getline(cin, Text);              // Read an entire line from standard input.
+
+    return Text; // Return the entered text.
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+// Function: EncryptText
+// Purpose: Encrypts the given text by shifting each character by a specified encryption key.
+// Parameters:
+//   Text - the original text to be encrypted.
+//   EncryptionKey - a short integer representing the shift value to apply to each character.
+// Returns: The encrypted text.
+string EncryptText(string Text, short EncryptionKey)
+{
+    // Loop through each character of the text.
+    // Note: Using "<= Text.length()" iterates one extra time (accessing the null terminator), 
+    // which may be unintended. Ideally, use "< Text.length()".
+    for (int i = 0; i <= Text.length(); i++)
+    {
+        // Convert the current character to its integer ASCII value,
+        // add the encryption key, cast it back to char, and assign it back.
+        Text[i] = char((int)Text[i] + EncryptionKey);
+    }
+    return Text; // Return the encrypted text.
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+// Function: DecryptText
+// Purpose: Decrypts the given text by reversing the encryption process.
+//          It shifts each character back by the specified encryption key.
+// Parameters:
+//   Text - the encrypted text to be decrypted.
+//   EncryptionKey - the same short integer key used during encryption.
+// Returns: The decrypted (original) text.
+string DecryptText(string Text, short EncryptionKey)
+{
+    // Loop through each character of the text.
+    // Note: Using "<= Text.length()" will process one extra character (the null terminator).
+    for (int i = 0; i <= Text.length(); i++)
+    {
+        // Convert the current character to its ASCII integer value,
+        // subtract the encryption key, cast back to char, and assign it back.
+        Text[i] = char((int)Text[i] - EncryptionKey);
+    }
+    return Text; // Return the decrypted text.
+}
+
+// Main function: Program entry point.
+int main()
+{
+    const short EncryptionKey = 500; // Define a constant encryption key to be used for both encryption and decryption.
+
+    string TextAfterEncryption, TextAfterDecryption;  // Variables to store the encrypted and decrypted text.
+
+    // Read the original text from the user.
+    string Text = ReadText();
+
+    // Encrypt the text using the specified encryption key.
+    TextAfterEncryption = EncryptText(Text, EncryptionKey);
+
+    // Decrypt the text back to its original form using the same encryption key.
+    TextAfterDecryption = DecryptText(TextAfterEncryption, EncryptionKey);
+
+    // Display the original text.
+    cout << "\nText Before Encryption : " << Text << endl;
+    // Display the encrypted text.
+    cout << "Text After Encryption  : " << TextAfterEncryption << endl;
+    // Display the decrypted text.
+    cout << "Text After Decryption  : " << TextAfterDecryption << endl;
+
+    return 0; // Return 0 to indicate successful program execution.
+}
