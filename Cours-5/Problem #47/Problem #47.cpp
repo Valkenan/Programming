@@ -1,4 +1,4 @@
-#include <iostream>   // Include iostream for input/output operations.
+﻿#include <iostream>   // Include iostream for input/output operations.
 using namespace std;  // Use the standard namespace to simplify usage of standard functions.
 
 // Function: GetFractionPart
