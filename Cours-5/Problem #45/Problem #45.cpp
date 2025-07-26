@@ -1,5 +1,5 @@
 #include <iostream>   // Include iostream for input/output operations.
-using namespace std;  // Use the standard namespace to simplify usage of standard functions.
+using namespace std;  // Use the standard namespace to simplify standard functions.
 
 // Function: RandomNumber
 // Purpose: Generates a random integer within the inclusive range [From, To].
@@ -10,8 +10,8 @@ using namespace std;  // Use the standard namespace to simplify usage of standar
 int RandomNumber(int From, int To)
 {
     // Generate a random number:
-    // rand() % (To - From + 1) gives a number between 0 and (To - From),
-    // adding From shifts it into the range [From, To].
+    // rand() % (To - From + 1) gives a number between 0 and (To - From).
+    // Adding From shifts it into the range [From, To].
     int randNum = rand() % (To - From + 1) + From;
     return randNum;  // Return the generated random number.
 }
@@ -45,27 +45,27 @@ void PrintArray(int arr[100], int arrLength)
     cout << "\n";  // Print a newline after all elements.
 }
 
-// Function: PositiveCount
-// Purpose: Counts how many elements in the array are positive (including zero).
+// Function: NegativeCount
+// Purpose: Counts how many elements in the array are negative.
 // Parameters:
 //   - arr: The array to check.
 //   - arrLength: The number of elements in the array.
-// Returns: The count of elements that are greater than or equal to 0.
-int PositiveCount(int arr[100], int arrLength)
+// Returns: The count of elements that are less than 0.
+int NegativeCount(int arr[100], int arrLength)
 {
-    int Counter = 0;  // Initialize a counter for positive numbers.
+    int Counter = 0;  // Initialize a counter for negative numbers.
 
     // Loop through each element of the array.
     for (int i = 0; i < arrLength; i++)
     {
-        // Check if the current element is positive (or zero).
-        if (arr[i] >= 0)
+        // Check if the current element is negative.
+        if (arr[i] < 0)
         {
             Counter++;  // Increment the counter if the condition is met.
         }
     }
 
-    return Counter;  // Return the total count of positive numbers.
+    return Counter;  // Return the total count of negative numbers.
 }
 
 // Main function: Entry point of the program.
@@ -84,9 +84,9 @@ int main() {
     cout << "\nArray Elements: ";
     PrintArray(arr, arrLength);
 
-    // Count and print the number of positive numbers in the array.
-    cout << "\nPositive Numbers count is: ";
-    cout << PositiveCount(arr, arrLength) << endl;
+    // Count and print the number of negative numbers in the array.
+    cout << "\nNegative Numbers count is: ";
+    cout << NegativeCount(arr, arrLength) << endl;
 
     return 0;  // Return 0 to indicate successful program execution.
 }
